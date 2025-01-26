@@ -112,6 +112,32 @@ export async function getCostsForMonth(month, year) {
 }
 
 /**
+ * Retrieves all cost records for a given year.
+ * @param year
+ * @returns {Promise<Array<object>>} Array of cost objects for the specified year.
+ * */
+export async function getCostsForYear(year) {
+    const db = await openDB(); // your open DB logic
+    const tx = db.transaction('costs', 'readonly');
+    const store = tx.objectStore('costs');
+
+    return new Promise((resolve, reject) => {
+        const request = store.getAll();
+        request.onsuccess = () => {
+            const allCosts = request.result;
+            // Filter by the specified year
+            const filtered = allCosts.filter((item) => {
+                const d = new Date(item.date);
+                return d.getFullYear() === year;
+            });
+            resolve(filtered);
+        };
+        request.onerror = () => reject(request.error);
+    });
+}
+
+
+/**
  * Calculates total costs per category for the given month and year.
  * @param {number} month - 1-12
  * @param {number} year - four-digit year (e.g., 2025)
@@ -183,6 +209,8 @@ export async function getCategoryTotalsForYear(year) {
 /**
  * Returns an array of the last N items added, sorted descending by date or ID.
  * Example: sort by 'id' descending (assuming 'id' auto-increments).
+ * @param {number} n - Number of items to retrieve
+ * @returns {Promise<Array<object>>} Array of the last N items
  */
 export async function getLastNItems(n = 15) {
     const db = await openDB(); // your openDB function
@@ -200,6 +228,23 @@ export async function getLastNItems(n = 15) {
             const lastN = allCosts.slice(0, n);
             resolve(lastN);
         };
+        request.onerror = () => reject(request.error);
+    });
+}
+
+/**
+ * Deletes a cost record by its ID.
+ * @param {number} id - The primary key of the record to delete.
+ * @returns {Promise<void>}
+ */
+export async function deleteCost(id) {
+    const db = await openDB(); // your openDB function
+    const tx = db.transaction('costs', 'readwrite');
+    const store = tx.objectStore('costs');
+
+    return new Promise((resolve, reject) => {
+        const request = store.delete(id);
+        request.onsuccess = () => resolve();
         request.onerror = () => reject(request.error);
     });
 }

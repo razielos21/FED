@@ -14,6 +14,7 @@ import {
     TextField,
 } from '@mui/material';
 import { addCost } from '../idb/idbModule'; // Adjust import to your IndexedDB module path
+import PropTypes from 'prop-types';
 
 const CATEGORIES = [
     'Food',
@@ -24,7 +25,7 @@ const CATEGORIES = [
     'Other',
 ];
 
-function AddCostForm() {
+function AddCostForm({ onAddSuccess }) {
     const [sum, setSum] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
@@ -53,6 +54,10 @@ function AddCostForm() {
             setCategory('');
             setDescription('');
             setDate('');
+
+            if(onAddSuccess) {
+                onAddSuccess();
+            }
         } catch (error) {
             console.error('Error adding cost:', error);
             alert('Failed to add cost. See console for details.');
@@ -107,5 +112,13 @@ function AddCostForm() {
         </Box>
     );
 }
+
+AddCostForm.propTypes = {
+    onAddSuccess: PropTypes.func,
+};
+
+AddCostForm.defaultProps = {
+    onAddSuccess: null,
+};
 
 export default AddCostForm;
