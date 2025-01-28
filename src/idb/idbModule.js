@@ -97,6 +97,7 @@ export async function getCostsForMonth(month, year) {
 
         request.onsuccess = () => {
             const allCosts = request.result;
+            allCosts.sort((a, b) => new Date(a.date) - new Date(b.date));
             // Filter by the specified month and year
             const filtered = allCosts.filter((cost) => {
                 const d = new Date(cost.date);
@@ -125,6 +126,7 @@ export async function getCostsForYear(year) {
         const request = store.getAll();
         request.onsuccess = () => {
             const allCosts = request.result;
+            allCosts.sort((a, b) => new Date(a.date) - new Date(b.date));
             // Filter by the specified year
             const filtered = allCosts.filter((item) => {
                 const d = new Date(item.date);
@@ -136,75 +138,6 @@ export async function getCostsForYear(year) {
     });
 }
 
-
-/**
- * Calculates total costs per category for the given month and year.
- * @param {number} month - 1-12
- * @param {number} year - four-digit year (e.g., 2025)
- * @returns {Promise<Array<{ category: string, total: number }>>}
- *   An array of objects, each containing { category, total }
- */
-export async function getCategoryTotalsForMonth(month, year) {
-    // Reuse getCostsForMonth, then aggregate
-    const costs = await getCostsForMonth(month, year);
-    const totalsMap = {};
-
-    costs.forEach((cost) => {
-        const cat = cost.category || 'Uncategorized';
-        if (!totalsMap[cat]) {
-            totalsMap[cat] = 0;
-        }
-        totalsMap[cat] += cost.sum;
-    });
-
-    // Convert the map into an array suitable for charts
-    const result = Object.keys(totalsMap).map((cat) => ({
-        category: cat,
-        total: totalsMap[cat],
-    }));
-
-    return result;
-}
-
-/**
- * Calculates total costs per category for an entire year.
- * @param {number} year - four-digit year (e.g., 2025)
- * @returns {Promise<Array<{ category: string, total: number }>>}
- */
-export async function getCategoryTotalsForYear(year) {
-    // 1) Open DB, read all records
-    const db = await openDB();
-    const tx = db.transaction(STORE_NAME, 'readonly');
-    const store = tx.objectStore(STORE_NAME);
-
-    return new Promise((resolve, reject) => {
-        const request = store.getAll();
-        request.onsuccess = () => {
-            const allCosts = request.result;
-            // 2) Filter by year
-            const filtered = allCosts.filter((cost) => {
-                const d = new Date(cost.date);
-                return d.getFullYear() === year;
-            });
-            // 3) Aggregate totals by category
-            const totalsMap = {};
-            filtered.forEach((item) => {
-                const cat = item.category || 'Uncategorized';
-                if (!totalsMap[cat]) {
-                    totalsMap[cat] = 0;
-                }
-                totalsMap[cat] += item.sum;
-            });
-            // 4) Convert map to array
-            const result = Object.keys(totalsMap).map((cat) => ({
-                category: cat,
-                total: totalsMap[cat],
-            }));
-            resolve(result);
-        };
-        request.onerror = () => reject(request.error);
-    });
-}
 
 /**
  * Returns an array of the last N items added, sorted descending by date or ID.
@@ -221,9 +154,7 @@ export async function getLastNItems(n = 15) {
         const request = store.getAll();
         request.onsuccess = () => {
             let allCosts = request.result;
-            // Sort by 'id' descending (assuming each record has an autoIncrement 'id')
-            // If you prefer sorting by date, you'd parse cost.date and sort by time desc.
-            allCosts.sort((a, b) => b.id - a.id);
+            allCosts.sort((a, b) => new Date(a.date) - new Date(b.date));
             // Take the first N items
             const lastN = allCosts.slice(0, n);
             resolve(lastN);

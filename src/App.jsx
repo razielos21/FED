@@ -7,12 +7,11 @@ import ReportPage from './pages/ReportPage';
 function App() {
     return (
         <Router>
-            {/* Use your existing NavBar component */}
             <AppNavbar />
 
             <Routes>
-                <Route path="/" element={<MainPage />} />
-                <Route path="/report" element={<ReportPage />} />
+                <Route path="/FED/" element={<MainPage />} />
+                <Route path="/FED/report" element={<ReportPage />} />
             </Routes>
         </Router>
     );

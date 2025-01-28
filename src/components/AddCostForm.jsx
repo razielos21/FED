@@ -84,7 +84,7 @@ function AddCostForm({ onAddSuccess }) {
                     label="Category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    required
+                    required={true}
                 >
                     {CATEGORIES.map((cat) => (
                         <MenuItem key={cat} value={cat}>

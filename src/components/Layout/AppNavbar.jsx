@@ -1,4 +1,4 @@
-import React from 'react';
+import 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -9,10 +9,10 @@ function AppNavbar() {
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                     Cost Manager
                 </Typography>
-                <Button color="inherit" component={Link} to="/">
+                <Button color="inherit" component={Link} to="/FED/">
                     Home
                 </Button>
-                <Button color="inherit" component={Link} to="/report">
+                <Button color="inherit" component={Link} to="/FED/report">
                     Report
                 </Button>
             </Toolbar>
