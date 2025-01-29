@@ -33,7 +33,7 @@ To set up the project locally, follow these steps:
    npm start
    ```
 
-   The application will be accessible at `http://localhost:3000`.
+   The application will be accessible at `http://localhost:3000/FED/`.
 
 ## Project Structure
 
@@ -77,7 +77,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 For questions or feedback, please open an issue on the [GitHub repository](https://github.com/yotam4h/FED/issues).
 
----
 
-*Note: Replace placeholders in square brackets with specific information related to your project.*
 
