@@ -109,6 +109,12 @@ function AddCostForm({ onAddSuccess }) {
                 value={sum}
                 onChange={(e) => setSum(e.target.value)}
                 type="number"
+                inputProps={{ min: 0, step: '0.01' }} // Prevent negative numbers
+                onKeyDown={(e) => {
+                    if (e.key === '-' || e.key === '+' || e.key === 'e' || e.key === 'E') { // Prevent these keys
+                        e.preventDefault();
+                    }
+                }}
                 required
             />
             <FormControl sx={{ minWidth: 120 }}>
@@ -138,6 +144,7 @@ function AddCostForm({ onAddSuccess }) {
                 onChange={(e) => setDate(e.target.value)}
                 type="date"
                 InputLabelProps={{ shrink: true }}
+                inputProps={{ max: formatDateToYYYYMMDD(today) }} // Prevent future dates
                 required
             />
             <Button variant="contained" color="primary" type="submit">
