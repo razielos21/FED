@@ -138,7 +138,6 @@ function AddCostForm({ onAddSuccess }) {
                 onChange={(e) => setDate(e.target.value)}
                 type="date"
                 InputLabelProps={{ shrink: true }}
-                inputProps
                 required
             />
             <Button variant="contained" color="primary" type="submit">
