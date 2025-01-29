@@ -9,7 +9,7 @@
  *
  * Example usage:
  *  import CategoryPieChart from './CategoryPieChart.jsx';
- *  ReactDOM.render(<CategoryPieChart chartData={data} colors={colorArray} />, document.getElementById('root
+ *  ReactDOM.render(<CategoryPieChart data={data} colorArray={colorArray} />, document.getElementById('root'));
  *  // where data is an array like [{ category, total }, ...]
  *  // and colorArray is an array of string color codes
  *  // e.g., ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
