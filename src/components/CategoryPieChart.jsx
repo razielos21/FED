@@ -35,7 +35,7 @@ function CategoryPieChart({ chartData, colors }) {
     }
 
     return (
-        <PieChart width={400} height={300}>
+        <PieChart width={400} height={300} style={{ fontFamily: 'Arial', fontWeight: 'bold', fontSize: '14px' }}>
             <Pie data={chartData} dataKey="total" nameKey="category" outerRadius={100} label>
                 {chartData.map((entry, index) => (
                     <Cell key={entry.category} fill={colors[index % colors.length]} />
