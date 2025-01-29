@@ -40,12 +40,8 @@ To set up the project locally, follow these steps:
 ```
 FED/
 ├── public/
-│   ├── index.html
-│   └── ...
 ├── src/
 │   ├── assets/
-│   │   ├── images/
-│   │   └── styles/
 │   ├── components/
 │   ├── pages/
 │   ├── App.js
@@ -56,7 +52,7 @@ FED/
 └── ...
 ```
 
-- `public/`: Contains static files like `index.html`.
+- `public/`: Contains static files.
 - `src/`: Main source code directory.
     - `assets/`: Assets such as images and styles.
     - `components/`: Reusable React components.
