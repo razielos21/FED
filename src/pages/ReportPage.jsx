@@ -5,8 +5,35 @@
  *   - An entire year (if "All Year?" is checked).
  *
  * Automatically loads data for the current month/year on mount.
+ * Allows user to select a different month/year and refresh the data.
+ * Allows user to delete cost items.
+ * Uses Material-UI components: Box, Typography.
+ * It is intended for use in a React environment (ES Modules).
+ *
+ * Exports:
+ *  ReportPage: React component
+ *  COLORS: Array of colors for the pie chart
+ *  computeCategoryTotals: Function to compute category totals from cost items
+ *  fetchReportData: Function to fetch data based on month/year or entire year
+ *  handleGetReport: Function to handle "Get Report" button click
+ *  handleDelete: Function to handle item deletion
+ *  defaultMonth: Number representing the current month
+ *  defaultYearDate: Date object representing the current year
+ *  currentYear: Number representing the current year
+ *  maxYearDate: Date object representing the last day of the current year
+ *  chartData: Array of objects representing category totals for the pie chart
+ *  now: Date object representing the current date
+ *  fetchReportData: Function to fetch data based on month/year or entire year
+ *  handleGetReport: Function to handle "Get Report" button click
+ *  handleDelete: Function to handle item deletion
+ *
+ * Example usage:
+ *  import ReportPage from './ReportPage.jsx';
+ *  ReactDOM.render(<ReportPage />, document.getElementById('root'));
+ *
  */
 
+// Import necessary modules
 import  { useEffect, useState, useMemo } from 'react';
 import { Box, Typography } from '@mui/material';
 import { getCostsForMonth, getCostsForYear, deleteCost } from '../idb/idbModule';
@@ -15,12 +42,13 @@ import MonthYearControls from '../components/MonthYearControls';
 import CostsTable from '../components/CostsTable';
 import CategoryPieChart from '../components/CategoryPieChart';
 
+// Constants for the pie chart
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA46BE', '#5CABFA'];
 
 /**
- * Convert list of cost items into category totals for the pie chart.
- * item -> { category: string, sum: number }
- * grouped by category.
+ * Compute category totals from an array of cost items.
+ * @param costs - Array of cost items with properties: category, sum
+ * @returns {{category: *, total: *}[]}
  */
 function computeCategoryTotals(costs) {
     const totalsMap = {};
@@ -37,7 +65,13 @@ function computeCategoryTotals(costs) {
     }));
 }
 
+/**
+ * Displays a table + pie chart for either:
+ * @returns {JSX.Element} - The report page content
+ * @constructor
+ */
 function ReportPage() {
+    // Get current month/year
     const now = new Date();
     const defaultMonth = now.getMonth() + 1; // 1-based
     const defaultYearDate = new Date(now.getFullYear(), 0, 1);
@@ -79,13 +113,12 @@ function ReportPage() {
 
     // Automatically load current month/year on mount
     useEffect(() => {
-        fetchReportData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        fetchReportData().then(() => console.log('Fetched report data'));
     }, []);
 
     // Refresh data when "Get Report" is clicked
     const handleGetReport = () => {
-        fetchReportData();
+        fetchReportData().then(() => console.log('Fetched report data'));
     };
 
     // Handle item deletion, then re-fetch
@@ -95,7 +128,7 @@ function ReportPage() {
 
         try {
             await deleteCost(id);
-            fetchReportData();
+            await fetchReportData();
         } catch (err) {
             console.error('Error deleting cost:', err);
         }

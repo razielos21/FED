@@ -1,3 +1,20 @@
+/**
+ * @file CostsTable.jsx
+ * This file provides a table component for displaying cost items.
+ * It uses Material-UI components: Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton.
+ * It is intended for use in a React environment (ES Modules).
+ *
+ * Exports:
+ *  CostsTable: React component
+ *
+ * Example usage:
+ *  import CostsTable from './CostsTable.jsx';
+ *  ReactDOM.render(<CostsTable costs={data} onDelete={handleDelete} />, document.getElementById('root'));
+ *  // where data is an array of objects like [{ id, date, category, sum, description }, ...]
+ *  // and handleDelete is a function to delete a cost item by ID
+ */
+
+// Import necessary modules
 import 'react';
 import {
     Table,
@@ -10,10 +27,14 @@ import {
     IconButton,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PropTypes from "prop-types";
 
 /**
- * Renders a table of cost items.
- * @param {{ costs: Array, onDelete: Function }} props
+ * A table component for displaying cost items.
+ * @param costs - Array of cost items with properties: id, date, category, sum, description
+ * @param onDelete - Function to delete a cost item by ID
+ * @returns {JSX.Element}
+ * @constructor
  */
 function CostsTable({ costs, onDelete }) {
     return (
@@ -51,5 +72,11 @@ function CostsTable({ costs, onDelete }) {
         </TableContainer>
     );
 }
+
+// Prop types for CostsTable component
+CostsTable.propTypes = {
+    costs: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onDelete: PropTypes.func.isRequired,
+};
 
 export default CostsTable;

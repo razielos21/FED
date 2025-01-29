@@ -1,12 +1,34 @@
+/**
+ * @file MainPage.jsx
+ * This file provides the main page for the application.
+ * It uses Material-UI components: Box, Typography.
+ * It is intended for use in a React environment (ES Modules).
+ *
+ * Exports:
+ *  MainPage: React component
+ *
+ * Example usage:
+ *  import MainPage from './MainPage.jsx';
+ *  ReactDOM.render(<MainPage />, document.getElementById('root'));
+ */
+
+// Import necessary modules
 import  { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { getLastNItems, deleteCost } from '../idb/idbModule';
 import AddCostForm from '../components/AddCostForm';
 import CostsTable from '../components/CostsTable';
 
+/**
+ * The main page for the application.
+ * @returns {JSX.Element} - The main page content
+ * @constructor
+ */
 function MainPage() {
+    // Initialize state for costs
     const [costs, setCosts] = useState([]);
 
+    // Fetch the last 15 cost items from the database
     const fetchLast15 = async () => {
         try {
             const data = await getLastNItems(15);
@@ -16,8 +38,9 @@ function MainPage() {
         }
     };
 
+    // Fetch the last 15 items on initial render
     useEffect(() => {
-        fetchLast15();
+        fetchLast15().then(() => console.log('Fetched last 15 items'));
     }, []);
 
     /**
@@ -30,7 +53,7 @@ function MainPage() {
         try {
             await deleteCost(id);
             // Refresh the table to reflect the deletion
-            fetchLast15();
+            await fetchLast15();
         } catch (err) {
             console.error('Error deleting cost:', err);
         }

@@ -1,13 +1,27 @@
 /**
  * @file AddCostForm.jsx
  * A form that allows the user to add a new cost entry, ensuring sum > 0 and defaulting date to today.
+ * It uses Material-UI components: Box, Button, FormControl, InputLabel, MenuItem, Select, TextField.
+ * It is intended for use in a React environment (ES Modules).
+ *
+ * Exports:
+ *  AddCostForm: React component
+ *
+ * Example usage:
+ *  import AddCostForm from './AddCostForm.jsx';
+ *  ReactDOM.render(<AddCostForm />, document.getElementById('root'));
+ *
+ *  // Optionally, provide a callback function to refresh the list after adding a cost
+ *  ReactDOM.render(<AddCostForm onAddSuccess={refreshList} />, document.getElementById('root'));
  */
 
+// Import necessary modules
 import { useState } from 'react';
 import {Box, Button, FormControl, InputLabel, MenuItem, Select, TextField} from '@mui/material';
 import { addCost } from '../idb/idbModule'; // Adjust path as needed
 import PropTypes from 'prop-types';
 
+// List of available categories for costs
 const CATEGORIES = [
     'Food',
     'Transportation',
@@ -17,6 +31,12 @@ const CATEGORIES = [
     'Other',
 ];
 
+/**
+ * A form that allows the user to add a new cost entry, ensuring sum > 0 and defaulting date to today.
+ * @param onAddSuccess - Optional callback function to refresh the list after adding a cost
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function AddCostForm({ onAddSuccess }) {
     // Helper to format date as YYYY-MM-DD
     const formatDateToYYYYMMDD = (dateObj) => {
@@ -28,12 +48,14 @@ function AddCostForm({ onAddSuccess }) {
 
     // Default date is the current date
     const today = new Date();
+    // Initialize form state
     const [sum, setSum] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     // Initialize date to today's date in YYYY-MM-DD format
     const [date, setDate] = useState(formatDateToYYYYMMDD(today));
 
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -43,12 +65,14 @@ function AddCostForm({ onAddSuccess }) {
             return;
         }
 
+        // Ensure sum is a positive number
         const sumNumber = parseFloat(sum);
         if (isNaN(sumNumber) || sumNumber <= 0) {
             alert('Sum must be a positive number!');
             return;
         }
 
+        // Add the cost to the database
         try {
             await addCost({
                 sum: sumNumber,
@@ -114,6 +138,7 @@ function AddCostForm({ onAddSuccess }) {
                 onChange={(e) => setDate(e.target.value)}
                 type="date"
                 InputLabelProps={{ shrink: true }}
+                inputProps
                 required
             />
             <Button variant="contained" color="primary" type="submit">
@@ -123,10 +148,12 @@ function AddCostForm({ onAddSuccess }) {
     );
 }
 
+// Prop types for AddCostForm component
 AddCostForm.propTypes = {
     onAddSuccess: PropTypes.func,
 };
 
+// Default props for AddCostForm component
 AddCostForm.defaultProps = {
     onAddSuccess: null,
 };
