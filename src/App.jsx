@@ -19,14 +19,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, IconButton } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { lightTheme, darkTheme } from './theme';
 import AppNavbar from './components/Layout/AppNavbar';
 import MainPage from './pages/MainPage';
 import ReportPage from './pages/ReportPage';
-import darkModeIcon from "./assets/dark-mode.png";
 import './styles.css';
-
 
 function App() {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -42,13 +40,10 @@ function App() {
     return (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
-            <IconButton onClick={toggleTheme} color="primary">
-                <img src={darkModeIcon} alt="Dark Mode" style={{ width: 24, height: 24 }} />
-            </IconButton>
             <Router>
-                <AppNavbar/>
+                <AppNavbar toggleTheme={toggleTheme} />
                 <Routes>
-                <Route path="/FED/" element={<MainPage />} />
+                    <Route path="/FED/" element={<MainPage />} />
                     <Route path="/FED/report" element={<ReportPage />} />
                 </Routes>
             </Router>
