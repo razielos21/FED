@@ -16,27 +16,43 @@
  */
 
 // Importing components
-import 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, IconButton } from '@mui/material';
+import { lightTheme, darkTheme } from './theme';
 import AppNavbar from './components/Layout/AppNavbar';
 import MainPage from './pages/MainPage';
 import ReportPage from './pages/ReportPage';
+import darkModeIcon from "./assets/dark-mode.png";
+import './styles.css';
 
-/**
- * Main component of the application
- * @returns {JSX.Element} - Application
- * @constructor
- */
+
 function App() {
-    return (
-        <Router>
-            <AppNavbar />
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
-            <Routes>
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
+    useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkMode);
+    }, [isDarkMode]);
+
+    return (
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <CssBaseline />
+            <IconButton onClick={toggleTheme} color="primary">
+                <img src={darkModeIcon} alt="Dark Mode" style={{ width: 24, height: 24 }} />
+            </IconButton>
+            <Router>
+                <AppNavbar/>
+                <Routes>
                 <Route path="/FED/" element={<MainPage />} />
-                <Route path="/FED/report" element={<ReportPage />} />
-            </Routes>
-        </Router>
+                    <Route path="/FED/report" element={<ReportPage />} />
+                </Routes>
+            </Router>
+        </ThemeProvider>
     );
 }
 
