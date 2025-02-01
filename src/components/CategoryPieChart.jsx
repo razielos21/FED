@@ -25,7 +25,7 @@ import PropTypes from 'prop-types';
 const CATEGORY_COLORS = {
     'Food': '#FF6384',
     'Transportation': '#ff974a',
-    'Rent': '#ffb100',
+    'Rent': '#80ff53',
     'Utilities': '#4BC0C0',
     'Entertainment': '#9966FF',
     'Other': '#858585',

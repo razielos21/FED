@@ -13,10 +13,10 @@
  */
 
 // Import necessary modules
-import React from 'react';
+import 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
-import darkModeIcon from '../../assets/dark-mode.png';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 function AppNavbar({ toggleTheme }) {
     return (
@@ -26,7 +26,7 @@ function AppNavbar({ toggleTheme }) {
                     Cost Manager
                 </Typography>
                 <IconButton onClick={toggleTheme} color="inherit">
-                    <img src={darkModeIcon} alt="Dark Mode" style={{ width: 24, height: 24 }} />
+                   <DarkModeIcon/>
                 </IconButton>
                 <Button color="inherit" component={Link} to="/FED/">
                     Home
