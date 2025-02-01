@@ -118,7 +118,7 @@ function AddCostForm({ onAddSuccess }) {
                 required
             />
             <FormControl sx={{ minWidth: 120 }}>
-                <InputLabel id="category-label">Category</InputLabel>
+                <InputLabel id="category-label" required>Category</InputLabel>
                 <Select
                     labelId="category-label"
                     label="Category"
