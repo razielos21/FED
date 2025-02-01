@@ -14,21 +14,20 @@
 
 // Import necessary modules
 import 'react';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
-/**
- * A simple navigation bar for the application.
- * @returns {JSX.Element}
- * @constructor
- */
-function AppNavbar() {
+function AppNavbar({ toggleTheme }) {
     return (
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                     Cost Manager
                 </Typography>
+                <IconButton onClick={toggleTheme} color="inherit">
+                   <DarkModeIcon/>
+                </IconButton>
                 <Button color="inherit" component={Link} to="/FED/">
                     Home
                 </Button>

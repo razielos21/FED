@@ -42,9 +42,6 @@ import MonthYearControls from '../components/MonthYearControls';
 import CostsTable from '../components/CostsTable';
 import CategoryPieChart from '../components/CategoryPieChart';
 
-// Constants for the pie chart
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA46BE', '#5CABFA'];
-
 /**
  * Compute category totals from an array of cost items.
  * @param costs - Array of cost items with properties: category, sum
@@ -156,7 +153,7 @@ function ReportPage() {
             <Typography variant="h4" gutterBottom>
                 Category Totals
             </Typography>
-            <CategoryPieChart chartData={chartData} colors={COLORS} />
+            <CategoryPieChart chartData={chartData}/>
         </Box>
     );
 }

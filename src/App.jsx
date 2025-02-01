@@ -16,27 +16,38 @@
  */
 
 // Importing components
-import 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import { lightTheme, darkTheme } from './theme';
 import AppNavbar from './components/Layout/AppNavbar';
 import MainPage from './pages/MainPage';
 import ReportPage from './pages/ReportPage';
+import './styles.css';
 
-/**
- * Main component of the application
- * @returns {JSX.Element} - Application
- * @constructor
- */
 function App() {
-    return (
-        <Router>
-            <AppNavbar />
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
-            <Routes>
-                <Route path="/FED/" element={<MainPage />} />
-                <Route path="/FED/report" element={<ReportPage />} />
-            </Routes>
-        </Router>
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
+    useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkMode);
+    }, [isDarkMode]);
+
+    return (
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <CssBaseline />
+            <Router>
+                <AppNavbar toggleTheme={toggleTheme} />
+                <Routes>
+                    <Route path="/FED/" element={<MainPage />} />
+                    <Route path="/FED/report" element={<ReportPage />} />
+                </Routes>
+            </Router>
+        </ThemeProvider>
     );
 }
 

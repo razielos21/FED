@@ -16,29 +16,32 @@
  */
 
 // Import necessary modules
-import 'react';
+import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 
-/**
- * A pie chart component that displays a breakdown of costs by category.
- * @param chartData - Array of objects with category and total properties
- * @param colors - Array of string color codes
- * @returns {JSX.Element}
- * @constructor
- */
-function CategoryPieChart({ chartData, colors }) {
-    // Display a message if there is no data
+// Mapping of categories to colors
+const CATEGORY_COLORS = {
+    'Food': '#FF6384',
+    'Transportation': '#ff974a',
+    'Rent': '#80ff53',
+    'Utilities': '#4BC0C0',
+    'Entertainment': '#9966FF',
+    'Other': '#858585',
+};
+
+function CategoryPieChart({ chartData }) {
     if (!chartData || chartData.length === 0) {
         return <Typography>No data to display.</Typography>;
     }
 
     return (
-        <PieChart width={400} height={300} style={{ fontFamily: 'Arial', fontWeight: 'bold', fontSize: '14px' }}>
+        <PieChart width={400} height={300}
+                  style={{ fontFamily: 'Arial', fontWeight: 'bold', fontSize: '14px' }}>
             <Pie data={chartData} dataKey="total" nameKey="category" outerRadius={100} label>
-                {chartData.map((entry, index) => (
-                    <Cell key={entry.category} fill={colors[index % colors.length]} />
+                {chartData.map((entry) => (
+                    <Cell key={entry.category} fill={CATEGORY_COLORS[entry.category]} />
                 ))}
             </Pie>
             <Tooltip />
@@ -47,16 +50,14 @@ function CategoryPieChart({ chartData, colors }) {
     );
 }
 
-// Prop types for CategoryPieChart component
 CategoryPieChart.propTypes = {
     chartData: PropTypes.arrayOf(PropTypes.object).isRequired,
-    colors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-// Default props for CategoryPieChart component
 CategoryPieChart.defaultProps = {
     chartData: [],
-    colors: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
-}
+};
 
 export default CategoryPieChart;
+
+
