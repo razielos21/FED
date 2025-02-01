@@ -4,12 +4,10 @@
  * @module App
  * @see module:App
  * @requires react
- * @requires react-router-dom
  * @requires ./components/Layout/AppNavbar
  * @requires ./pages/MainPage
  * @requires ./pages/ReportPage
  * @exports App
- * @version 0.1.0
  *
  * @createdBy Yotam Haimovitch & Raziel Otick
  *
