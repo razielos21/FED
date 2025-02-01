@@ -10,6 +10,10 @@ The FED project is a front-end application designed to manage costs. It is built
 - **Interactive Elements**: Engaging user interactions for enhanced usability.
 - **Modular Architecture**: Organized code structure for maintainability and scalability.
 
+## Demo
+
+[Live Demo](https://yotam4h.github.io/FED)
+
 ## Installation
 
 To set up the project locally, follow these steps:
