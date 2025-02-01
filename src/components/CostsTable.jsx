@@ -25,6 +25,7 @@ import {
     TableRow,
     Paper,
     IconButton,
+    Tooltip
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PropTypes from "prop-types";
@@ -57,6 +58,7 @@ function CostsTable({ costs, onDelete }) {
                             <TableCell>${item.sum}</TableCell>
                             <TableCell>{item.description}</TableCell>
                             <TableCell align="center">
+                                <Tooltip title="Delete">
                                 <IconButton
                                     aria-label="delete"
                                     color="error"
@@ -64,6 +66,7 @@ function CostsTable({ costs, onDelete }) {
                                 >
                                     <DeleteIcon />
                                 </IconButton>
+                                </Tooltip>
                             </TableCell>
                         </TableRow>
                     ))}
