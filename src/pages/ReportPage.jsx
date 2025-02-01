@@ -12,20 +12,6 @@
  *
  * Exports:
  *  ReportPage: React component
- *  COLORS: Array of colors for the pie chart
- *  computeCategoryTotals: Function to compute category totals from cost items
- *  fetchReportData: Function to fetch data based on month/year or entire year
- *  handleGetReport: Function to handle "Get Report" button click
- *  handleDelete: Function to handle item deletion
- *  defaultMonth: Number representing the current month
- *  defaultYearDate: Date object representing the current year
- *  currentYear: Number representing the current year
- *  maxYearDate: Date object representing the last day of the current year
- *  chartData: Array of objects representing category totals for the pie chart
- *  now: Date object representing the current date
- *  fetchReportData: Function to fetch data based on month/year or entire year
- *  handleGetReport: Function to handle "Get Report" button click
- *  handleDelete: Function to handle item deletion
  *
  * Example usage:
  *  import ReportPage from './ReportPage.jsx';
@@ -111,7 +97,7 @@ function ReportPage() {
     // Automatically load current month/year on mount
     useEffect(() => {
         fetchReportData().then(() => console.log('Fetched report data'));
-    }, []);
+    });
 
     // Refresh data when "Get Report" is clicked
     const handleGetReport = () => {

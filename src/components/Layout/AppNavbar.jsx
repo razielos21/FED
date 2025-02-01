@@ -50,7 +50,7 @@ function AppNavbar({ toggleTheme, isDarkMode }) {
 
 AppNavbar.propTypes = {
     toggleTheme: PropTypes.func.isRequired,
-    isDarkMode: PropTypes.func.isRequired,
+    isDarkMode: PropTypes.bool.isRequired,
 };
 
 
