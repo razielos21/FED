@@ -16,7 +16,7 @@
  */
 
 // Import necessary modules
-import React from 'react';
+import 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
