@@ -14,27 +14,35 @@
 
 // Import necessary modules
 import 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 import PropTypes from 'prop-types';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import HomeIcon from '@mui/icons-material/Home';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
-function AppNavbar({ toggleTheme }) {
+function AppNavbar({ toggleTheme, isDarkMode }) {
     return (
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                     Cost Manager
                 </Typography>
+                <Tooltip title={isDarkMode ? "Light Mode" : "Dark Mode" }>
                 <IconButton onClick={toggleTheme} color="inherit">
-                   <DarkModeIcon/>
+                   <DarkModeIcon fontSize="large"/>
                 </IconButton>
-                <Button color="inherit" component={Link} to="/FED/">
-                    Home
-                </Button>
-                <Button color="inherit" component={Link} to="/FED/report">
-                    Report
-                </Button>
+                </Tooltip>
+                <Tooltip title="Home">
+                <IconButton color="inherit" component={Link} to="/FED/">
+                    <HomeIcon fontSize="large"/>
+                </IconButton>
+                </Tooltip>
+                <Tooltip title = "Report">
+                <IconButton color="inherit" component={Link} to="/FED/report">
+                    <AssessmentIcon fontSize="large"/>
+                </IconButton>
+                </Tooltip>
             </Toolbar>
         </AppBar>
     );
@@ -42,6 +50,8 @@ function AppNavbar({ toggleTheme }) {
 
 AppNavbar.propTypes = {
     toggleTheme: PropTypes.func.isRequired,
+    isDarkMode: PropTypes.func.isRequired,
 };
+
 
 export default AppNavbar;

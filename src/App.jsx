@@ -41,7 +41,7 @@ function App() {
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
             <Router>
-                <AppNavbar toggleTheme={toggleTheme} />
+                <AppNavbar toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
                 <Routes>
                     <Route path="/FED/" element={<MainPage />} />
                     <Route path="/FED/report" element={<ReportPage />} />
