@@ -17,6 +17,7 @@ import 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import PropTypes from 'prop-types';
 
 function AppNavbar({ toggleTheme }) {
     return (
@@ -38,5 +39,9 @@ function AppNavbar({ toggleTheme }) {
         </AppBar>
     );
 }
+
+AppNavbar.propTypes = {
+    toggleTheme: PropTypes.func.isRequired,
+};
 
 export default AppNavbar;
