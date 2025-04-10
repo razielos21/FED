@@ -1,5 +1,21 @@
+/**
+ * @file App.jsx
+ * @description Main component of the application
+ * @module App
+ * @see module:App
+ * @requires react
+ * @requires ./components/Layout/AppNavbar
+ * @requires ./pages/MainPage
+ * @requires ./pages/ReportPage
+ * @exports App
+ *
+ * @createdBy Yotam Haimovitch & Raziel Otick
+ *
+ */
+
+// Importing components
 import { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { lightTheme, darkTheme } from './theme';
@@ -22,11 +38,11 @@ function App() {
     return (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
-            <Router basename="/FED-Project">
-                <AppNavbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+            <Router>
+                <AppNavbar toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
                 <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/report" element={<ReportPage />} />
+                    <Route path="/FED-Project/" element={<MainPage />} />
+                    <Route path="/FED-Project/report" element={<ReportPage />} />
                 </Routes>
             </Router>
         </ThemeProvider>
