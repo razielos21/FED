@@ -15,7 +15,7 @@
 
 // Importing components
 import { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { lightTheme, darkTheme } from './theme';
@@ -39,10 +39,10 @@ function App() {
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
             <Router>
-                <AppNavbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+                <AppNavbar toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
                 <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/report" element={<ReportPage />} />
+                    <Route path="/FED-Project/" element={<MainPage />} />
+                    <Route path="/FED-Project/report" element={<ReportPage />} />
                 </Routes>
             </Router>
         </ThemeProvider>

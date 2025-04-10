@@ -2,7 +2,7 @@
   "name": "project_playground_react",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://razielos21.github.io/FED-Project/",
+  "homepage": "https://razielos21.github.io/FED-Project",
   "type": "module",
   "scripts": {
     "dev": "vite",
