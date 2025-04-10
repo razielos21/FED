@@ -34,12 +34,12 @@ function AppNavbar({ toggleTheme, isDarkMode }) {
                 </IconButton>
                 </Tooltip>
                 <Tooltip title="Home">
-                <IconButton color="inherit" component={Link} to="/FED-Project/">
+                <IconButton color="inherit" component={Link} to="/FED/">
                     <HomeIcon fontSize="large"/>
                 </IconButton>
                 </Tooltip>
                 <Tooltip title = "Report">
-                <IconButton color="inherit" component={Link} to="/FED-Project/report">
+                <IconButton color="inherit" component={Link} to="/FED/report">
                     <AssessmentIcon fontSize="large"/>
                 </IconButton>
                 </Tooltip>

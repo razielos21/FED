@@ -41,8 +41,8 @@ function App() {
             <Router>
                 <AppNavbar toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
                 <Routes>
-                    <Route path="/FED-Project/" element={<MainPage />} />
-                    <Route path="/FED-Project/report" element={<ReportPage />} />
+                    <Route path="/FED/" element={<MainPage />} />
+                    <Route path="/FED/report" element={<ReportPage />} />
                 </Routes>
             </Router>
         </ThemeProvider>
