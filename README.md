@@ -12,7 +12,7 @@ The FED project is a front-end application designed to manage costs. It is built
 
 ## Demo
 
-[Live Demo](https://yotam4h.github.io/FED)
+[Live Demo](https://razielos21.github.io/FED/)
 
 ## Installation
 
@@ -21,7 +21,7 @@ To set up the project locally, follow these steps:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/yotam4h/FED.git
+   git clone https://github.com/razielos21/FED.git
    cd FED
    ```
 
